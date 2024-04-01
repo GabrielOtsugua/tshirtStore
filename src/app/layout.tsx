@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Heading, Shirt, ShoppingBag, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,14 +20,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header>Header</header>
+        <header className="flex justify-between items-center py-8 w-[80%] m-auto mb-12">
+          <div className="flex gap-2">
+            <Shirt className="text-primary" />
+            <p>tshirt.store</p>
+          </div>
+
+          <Button variant={"secondary"} className="p-3">
+            <ShoppingBag className="text-muted-foreground" />
+          </Button>
+        </header>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <main className="w-[80%] m-auto">{children}</main>
         </ThemeProvider>
       </body>
     </html>
