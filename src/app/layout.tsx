@@ -2,8 +2,18 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Heading, Shirt, ShoppingBag, User } from "lucide-react";
+import { Shirt, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,15 +30,68 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="flex justify-between items-center py-8 w-[80%] m-auto mb-12">
-          <div className="flex gap-2">
-            <Shirt className="text-primary" />
-            <p>tshirt.store</p>
-          </div>
+        <header className="fixed z-10 w-full backdrop-blur-sm">
+          <nav className="flex justify-between items-center py-8 w-[80%] m-auto">
+            <div className="flex gap-2">
+              <Shirt className="text-primary" />
+              <p>Tshirt Store</p>
+            </div>
 
-          <Button variant={"secondary"} className="p-3">
-            <ShoppingBag className="text-muted-foreground" />
-          </Button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant={"secondary"} className="p-3">
+                  <ShoppingBag className="text-muted-foreground" />
+                </Button>
+              </SheetTrigger>
+
+              <SheetContent className="w-[90%] text-sm md:text-base flex flex-col justify-between">
+                <SheetHeader className="mb-4">
+                  <SheetTitle>Sacola de compras</SheetTitle>
+                </SheetHeader>
+
+                <ScrollArea className="grow">
+                  <div className="flex flex-col gap-4">
+                    <div className="grid grid-cols-3 gap-4">
+                      <figure className="col-span-1 bg-secondary rounded-lg"></figure>
+                      <main className="col-span-2 flex flex-col gap-2">
+                        <p>Camiseta Beyond the Limits</p>
+                        <p>R$ 79,90</p>
+                        <Button variant={"outline"} className="w-20 h-auto">
+                          Remover
+                        </Button>
+                      </main>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <figure className="col-span-1 bg-secondary rounded-lg"></figure>
+                      <main className="col-span-2 flex flex-col gap-2">
+                        <p>Camiseta Beyond the Limits</p>
+                        <p>R$ 79,90</p>
+                        <Button variant={"outline"} className="w-20 h-auto">
+                          Remover
+                        </Button>
+                      </main>
+                    </div>
+                  </div>
+                </ScrollArea>
+
+                <SheetFooter className="block mt-4">
+                  <div>
+                    <span className="flex justify-between items-center mb-2 font-extralight">
+                      <p>Quantidade</p>
+                      <p>3 itens</p>
+                    </span>
+                    <span className="flex justify-between items-center mb-4 font-bold">
+                      <p>Valor total</p>
+                      <p>R$ 270,00</p>
+                    </span>
+                    <SheetClose asChild>
+                      <Button className="w-full">Finalizar compra</Button>
+                    </SheetClose>
+                  </div>
+                </SheetFooter>
+              </SheetContent>
+            </Sheet>
+          </nav>
         </header>
 
         <ThemeProvider
@@ -37,7 +100,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="w-[80%] m-auto">{children}</main>
+          <main className="w-[80%] m-auto pt-40">{children}</main>
         </ThemeProvider>
       </body>
     </html>
