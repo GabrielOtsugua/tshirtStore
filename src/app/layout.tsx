@@ -14,6 +14,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import tshirt1 from "../assets/tshirt1.png";
+import Image from "next/image";
+import tshirt2 from "../assets/tshirt2.png";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,13 +37,14 @@ export default function RootLayout({
         <header className="fixed z-10 w-full backdrop-blur-sm">
           <nav className="flex justify-between items-center py-8 w-[80%] m-auto">
             <div className="flex gap-2">
-              <Shirt className="text-primary" />
-              <p>Tshirt Store</p>
+              <p>
+                <span className="text-primary">Tshirt</span> Store
+              </p>
             </div>
 
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant={"secondary"} className="p-3">
+                <Button variant={"secondary"} className="h-auto p-2">
                   <ShoppingBag className="text-muted-foreground" />
                 </Button>
               </SheetTrigger>
@@ -52,7 +57,9 @@ export default function RootLayout({
                 <ScrollArea className="grow">
                   <div className="flex flex-col gap-4">
                     <div className="grid grid-cols-3 gap-4">
-                      <figure className="col-span-1 bg-secondary rounded-lg"></figure>
+                      <figure className="col-span-1 rounded-lg bg-gradient-to-b from-emerald-800 to-sky-800">
+                        <Image src={tshirt1} alt="" />
+                      </figure>
                       <main className="col-span-2 flex flex-col gap-2">
                         <p>Camiseta Beyond the Limits</p>
                         <p>R$ 79,90</p>
@@ -62,7 +69,9 @@ export default function RootLayout({
                       </main>
                     </div>
                     <div className="grid grid-cols-3 gap-4">
-                      <figure className="col-span-1 bg-secondary rounded-lg"></figure>
+                      <figure className="col-span-1 rounded-lg bg-gradient-to-b from-emerald-800 to-sky-800">
+                        <Image src={tshirt2} alt="" />
+                      </figure>
                       <main className="col-span-2 flex flex-col gap-2">
                         <p>Camiseta Beyond the Limits</p>
                         <p>R$ 79,90</p>
@@ -100,7 +109,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="w-[80%] m-auto pt-40">{children}</main>
+          <TooltipProvider>
+            <main className="w-[80%] m-auto pt-40">{children}</main>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

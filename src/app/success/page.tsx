@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import tshirt2 from "../../assets/tshirt2.png";
 
 export default function Success() {
   const router = useRouter();
@@ -9,9 +11,15 @@ export default function Success() {
     <div className="flex justify-center">
       <div className="flex flex-col items-center gap-12">
         <figure className="flex justify-between gap-4">
-          <div className="w-32 h-32 bg-secondary rounded-full"></div>
-          <div className="w-32 h-32 bg-primary rounded-full -ml-12"></div>
-          <div className="w-32 h-32 bg-secondary rounded-full -ml-12"></div>
+          <div className="w-32 h-32 bg-gradient-to-b from-emerald-800 to-sky-800 rounded-full border border-foreground">
+            <Image src={tshirt2} alt="" />
+          </div>
+          <div className="w-32 h-32 bg-gradient-to-b from-emerald-800 to-sky-800 rounded-full border border-foreground -ml-16">
+            <Image src={tshirt2} alt="" />
+          </div>
+          <div className="w-32 h-32 bg-gradient-to-b from-emerald-800 to-sky-800 rounded-full border border-foreground -ml-16">
+            <Image src={tshirt2} alt="" />
+          </div>
         </figure>
 
         <main className="max-w-96">

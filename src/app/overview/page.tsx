@@ -1,9 +1,16 @@
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import tshirt2 from "../../assets/tshirt2.png";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export default function Overview() {
   return (
-    <div className="min-h-96 grid grid-cols-2">
-      <figure className="bg-secondary rounded-lg"></figure>
+    <div className="grid grid-cols-2">
+      <figure className="from-emerald-800 to-sky-800">
+        <AspectRatio ratio={16 / 15.5} className="bg-gradient-to-b rounded-lg">
+          <Image src={tshirt2} alt="" className="h-full" />
+        </AspectRatio>
+      </figure>
 
       <div className="flex flex-col justify-between px-16 py-1">
         <main className="flex flex-col gap-6">
