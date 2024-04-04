@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Shirt, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -18,6 +18,8 @@ import tshirt1 from "../assets/tshirt1.png";
 import Image from "next/image";
 import tshirt2 from "../assets/tshirt2.png";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ContextProvider } from "@/contexts/Context";
+import { Header } from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,85 +36,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="fixed z-10 w-full backdrop-blur-sm">
-          <nav className="flex justify-between items-center py-8 w-[80%] m-auto">
-            <div className="flex gap-2">
-              <p>
-                <span className="text-primary">Tshirt</span> Store
-              </p>
-            </div>
+        <ContextProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
 
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant={"secondary"} className="h-auto p-2">
-                  <ShoppingBag className="text-muted-foreground" />
-                </Button>
-              </SheetTrigger>
-
-              <SheetContent className="w-[90%] text-sm md:text-base flex flex-col justify-between">
-                <SheetHeader className="mb-4">
-                  <SheetTitle>Sacola de compras</SheetTitle>
-                </SheetHeader>
-
-                <ScrollArea className="grow">
-                  <div className="flex flex-col gap-4">
-                    <div className="grid grid-cols-3 gap-4">
-                      <figure className="col-span-1 rounded-lg bg-gradient-to-b from-emerald-800 to-sky-800">
-                        <Image src={tshirt1} alt="" />
-                      </figure>
-                      <main className="col-span-2 flex flex-col gap-2">
-                        <p>Camiseta Beyond the Limits</p>
-                        <p>R$ 79,90</p>
-                        <Button variant={"outline"} className="w-20 h-auto">
-                          Remover
-                        </Button>
-                      </main>
-                    </div>
-                    <div className="grid grid-cols-3 gap-4">
-                      <figure className="col-span-1 rounded-lg bg-gradient-to-b from-emerald-800 to-sky-800">
-                        <Image src={tshirt2} alt="" />
-                      </figure>
-                      <main className="col-span-2 flex flex-col gap-2">
-                        <p>Camiseta Beyond the Limits</p>
-                        <p>R$ 79,90</p>
-                        <Button variant={"outline"} className="w-20 h-auto">
-                          Remover
-                        </Button>
-                      </main>
-                    </div>
-                  </div>
-                </ScrollArea>
-
-                <SheetFooter className="block mt-4">
-                  <div>
-                    <span className="flex justify-between items-center mb-2 font-extralight">
-                      <p>Quantidade</p>
-                      <p>3 itens</p>
-                    </span>
-                    <span className="flex justify-between items-center mb-4 font-bold">
-                      <p>Valor total</p>
-                      <p>R$ 270,00</p>
-                    </span>
-                    <SheetClose asChild>
-                      <Button className="w-full">Finalizar compra</Button>
-                    </SheetClose>
-                  </div>
-                </SheetFooter>
-              </SheetContent>
-            </Sheet>
-          </nav>
-        </header>
-
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider>
             <main className="w-[80%] m-auto pt-40">{children}</main>
-          </TooltipProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </ContextProvider>
       </body>
     </html>
   );

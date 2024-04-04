@@ -8,58 +8,25 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import tshirt1 from "../assets/tshirt1.png";
-import tshirt2 from "../assets/tshirt2.png";
-import tshirt3 from "../assets/tshirt3.png";
-import tshirt4 from "../assets/tshirt4.png";
-import tshirt5 from "../assets/tshirt5.png";
+
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { shirts } from "@/data";
+import { useMyContext } from "@/contexts/Context";
 
 export default function Home() {
   const router = useRouter();
 
-  const data = [
-    {
-      id: 1,
-      name: "Beyond the Limits",
-      price: 89.9,
-      img: tshirt1,
-    },
-    {
-      id: 2,
-      name: "Explorer",
-      price: 89.9,
-      img: tshirt2,
-    },
-    {
-      id: 3,
-      name: "Explorer on Fire",
-      price: 89.9,
-      img: tshirt3,
-    },
-    {
-      id: 4,
-      name: "Ignite",
-      price: 89.9,
-      img: tshirt4,
-    },
-    {
-      id: 5,
-      name: "Igniter",
-      price: 89.9,
-      img: tshirt5,
-    },
-  ];
+  const { addShirtToBag } = useMyContext();
 
   return (
     <>
       <Carousel className="w-full box-border">
         <CarouselContent className="-ml-1">
-          {data.map((item) => (
+          {shirts.map((item) => (
             <CarouselItem
               key={item.id}
               className="pl-1 md:basis-1/2 lg:basis-1/3"
@@ -81,7 +48,7 @@ export default function Home() {
                         <p>R$ {item.price}0</p>
                       </span>
                       <Button
-                        onClick={() => console.log("clicou")}
+                        onClick={() => addShirtToBag(item.id)}
                         variant={"ghost"}
                         className="h-auto p-2"
                       >
