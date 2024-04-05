@@ -2,24 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ShoppingBag } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import tshirt1 from "../assets/tshirt1.png";
-import Image from "next/image";
-import tshirt2 from "../assets/tshirt2.png";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { ContextProvider } from "@/contexts/Context";
 import { Header } from "@/components/Header";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,9 +28,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Toaster />
             <Header />
-
-            <main className="w-[80%] m-auto pt-40">{children}</main>
+            <main className="w-[80%] m-auto pt-40 lg:pt-32 xl:pt-40">
+              {children}
+            </main>
           </ThemeProvider>
         </ContextProvider>
       </body>

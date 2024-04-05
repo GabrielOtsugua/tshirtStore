@@ -14,8 +14,11 @@ import {
 import { ScrollArea } from "./ui/scroll-area";
 import Image from "next/image";
 import { useMyContext } from "@/contexts/Context";
+import { useRouter } from "next/navigation";
 
 export function Header() {
+  const router = useRouter();
+
   const { bag, removeShirtFromBag } = useMyContext();
 
   const totalPrice = bag
@@ -26,7 +29,7 @@ export function Header() {
 
   return (
     <header className="fixed z-10 w-full backdrop-blur-sm">
-      <nav className="flex justify-between items-center py-8 w-[80%] m-auto">
+      <nav className="flex justify-between items-center py-8 w-[90%] md:w-[80%] m-auto">
         <div className="flex gap-2">
           <p>
             <span className="text-primary">Tshirt</span> Store
@@ -35,7 +38,10 @@ export function Header() {
 
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant={"secondary"} className="h-auto p-2">
+            <Button variant={"secondary"} className="relative h-auto p-2">
+              <span className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-primary text-xs bg-secondary rounded-full border-2 border-background">
+                {totalItens}
+              </span>
               <ShoppingBag className="text-muted-foreground" />
             </Button>
           </SheetTrigger>
@@ -91,7 +97,13 @@ export function Header() {
                   <p>R$ {totalPrice}</p>
                 </span>
                 <SheetClose asChild>
-                  <Button className="w-full">Finalizar compra</Button>
+                  <Button
+                    onClick={() => router.push("success")}
+                    disabled={bag.length > 0 ? false : true}
+                    className="w-full"
+                  >
+                    Finalizar compra
+                  </Button>
                 </SheetClose>
               </div>
             </SheetFooter>
